@@ -34,6 +34,7 @@ here writes data or costs anything — every tool just reads public information.
 - Pick an ecosystem dependency → `../stellar-integration-finder/SKILL.md`
 - Dated, cited activity digest → `../stellar-ecosystem-digest/SKILL.md`
 - Turn an idea into a build path → `../stellar-builder-quickstart/SKILL.md`
+- Audit a draft against the ecosystem → `../stellar-content-auditor/SKILL.md`
 
 For **building on Stellar** (Soroban contracts, the JS stellar-sdk / Freighter /
 Stellar Wallets Kit for dApps, classic assets + trustlines + SAC for tokens,
@@ -169,6 +170,7 @@ From here, hand off: use `stellar-ecosystem-scout` to map the whole sector,
 | Pick a wallet/oracle/anchor/etc. dependency | `../stellar-integration-finder/SKILL.md` | `search_directory`, `get_project`, `find_similar_projects_semantic` |
 | Dated, cited recap of recent activity | `../stellar-ecosystem-digest/SKILL.md` | `list_documents`, `search_content_semantic`, `find_content_by_entity` |
 | Turn an idea into a build path | `../stellar-builder-quickstart/SKILL.md` | `search_directory`, `find_similar_projects_semantic` + https://developers.stellar.org |
+| Fact-check / enrich a draft (handles, citations) | `../stellar-content-auditor/SKILL.md` | `search_directory`, `get_project`, `find_content_by_entity` |
 
 ---
 

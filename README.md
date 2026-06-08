@@ -28,6 +28,7 @@ connector and the recipes inside each skill are model-agnostic — see
 | **stellar-integration-finder** | Find the right wallet / oracle / anchor / RWA / DEX to integrate. |
 | **stellar-ecosystem-digest** | Get a dated digest of recent activity on a theme or entity. |
 | **stellar-builder-quickstart** | Go from idea → Stellar primitives → prior art → a build path. |
+| **stellar-content-auditor** | Audit a draft against the ecosystem — fix @handles, add citations, flag bad claims. |
 
 See [`VISION.md`](VISION.md) for the design and authoring standard.
 
@@ -40,7 +41,7 @@ See [`VISION.md`](VISION.md) for the design and authoring standard.
 /plugin install lumenloop-skills@lumenloop
 ```
 
-Installing the plugin enables all seven skills **and** wires the `lumenloop` MCP
+Installing the plugin enables all eight skills **and** wires the `lumenloop` MCP
 connector from the bundled `.mcp.json`. Then connect the server (below).
 
 ### B. Project-scoped (clone into a repo)

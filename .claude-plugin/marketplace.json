@@ -9,7 +9,7 @@
     {
       "name": "lumenloop-skills",
       "source": "./",
-      "description": "Seven preconfigured skills for researching and building on Stellar, wired to LumenLoop's free read-only ecosystem MCP.",
+      "description": "Eight preconfigured skills for researching and building on Stellar, wired to LumenLoop's free read-only ecosystem MCP.",
       "version": "0.1.0",
       "category": "blockchain",
       "keywords": ["stellar", "soroban", "ecosystem", "scf", "mcp"]

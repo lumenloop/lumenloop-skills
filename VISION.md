@@ -32,7 +32,7 @@ sequence of MCP tool calls, equally usable as a prompt/reference in any client (
 
 1. **`.mcp.json`** — preconfigures the `lumenloop` connector so the tools exist the
    moment the repo is installed. No manual MCP setup.
-2. **`skills/`** — seven skills (below) that orchestrate those tools into workflows.
+2. **`skills/`** — eight skills (below) that orchestrate those tools into workflows.
 
 ### Scope guardrail (non-negotiable)
 
@@ -128,6 +128,7 @@ skill triggers, and **reference files** only when the body links to them. Theref
 | **stellar-integration-finder** | "I need a wallet / oracle / anchor / RWA / DEX on Stellar" → shortlist + route to a build skill. | `search_directory`, `find_similar_projects_semantic`, `search_content_semantic`, `get_project` |
 | **stellar-ecosystem-digest** | Dated digest of recent activity on a theme or named entity. | `list_documents`, `search_documents`, `search_content_semantic`, `find_content_by_entity`, `find_av_passages`, `list_research` |
 | **stellar-builder-quickstart** | From idea → pick Stellar primitives, check prior art via the MCP, route to the right dev skill. | `search_directory`, `find_similar_projects_semantic`, `get_project` |
+| **stellar-content-auditor** | Audit/enrich a draft — resolve mentioned projects to canonical names + @handles, cite claims, flag errors. | `search_directory`, `get_project`, `find_content_by_entity`, `search_content_semantic` |
 
 Each skill cross-links the others and (where relevant) points to external Stellar
 build references the reader may already have (Soroban, dapp/SDK, assets, data,
