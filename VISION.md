@@ -1,8 +1,9 @@
 # Vision — `lumenloop-skills`
 
-A small, curated repository of **Claude Agent Skills** that make Claude immediately
-useful for **researching and building on the Stellar ecosystem**, powered by
-LumenLoop's free, read-only ecosystem MCP at **`https://mcp.lumenloop.com`**.
+A small, curated repository of **MCP playbooks** — packaged as **Claude Code Agent
+Skills** — that make **any MCP-capable AI assistant** immediately useful for
+**researching and building on the Stellar ecosystem**, powered by LumenLoop's free,
+read-only ecosystem MCP at **`https://mcp.lumenloop.com`**.
 
 This document defines the *proper end result*: what a finished skill looks like,
 how the repo is structured, how someone installs it, and what we test against.
@@ -15,14 +16,19 @@ It is the contract the build loop validates every skill against
 
 LumenLoop publishes a free, **read-only** MCP server that exposes the public
 Stellar ecosystem directory — projects, Stellar Community Fund (SCF) submissions,
-and editorial/news/AV content — as 18 query tools any Claude client can connect to.
+and editorial/news/AV content — as 18 query tools. The server speaks the open
+[Model Context Protocol](https://modelcontextprotocol.io), so **any MCP-capable
+client can connect** (Claude, ChatGPT, Gemini, Cursor, or a custom agent).
 
-This repo is the **batteries-included companion**: preconfigured skills that teach
-Claude *how to use those tools well* to do real ecosystem work (landscape research,
-project due-diligence, SCF positioning, integration discovery, news digests) and to
-**route from ecosystem discovery into actually building** on Stellar.
+This repo is the **batteries-included companion**: preconfigured playbooks that teach
+the assistant *how to use those tools well* to do real ecosystem work (landscape
+research, project due-diligence, SCF positioning, integration discovery, news
+digests) and to **route from ecosystem discovery into actually building** on Stellar.
 
-Two things ship together:
+The playbooks are authored as **Claude Code Agent Skills** so they install with one
+command and auto-trigger in Claude Code — but each skill body is a model-agnostic
+sequence of MCP tool calls, equally usable as a prompt/reference in any client (see
+§4). Two things ship together:
 
 1. **`.mcp.json`** — preconfigures the `lumenloop` connector so the tools exist the
    moment the repo is installed. No manual MCP setup.
@@ -41,7 +47,8 @@ is concerned.
 ## 2. What a "proper" skill looks like
 
 Researched against Anthropic's Agent Skills docs (code.claude.com/docs/en/skills)
-and the conventions already used in this author's Stellar skills.
+and the conventions already used in this author's Stellar skills. The format is
+Claude Code's; the recipe content is portable.
 
 ### 2.1 Anatomy
 
@@ -56,7 +63,7 @@ skills/<skill-name>/
   invocation name (`/<skill-name>`), so `name:` in frontmatter must match the folder.
 - Bundled **reference files** hold heavy material (long catalogs, templates,
   copy-paste code) so the main body stays lean. The body links to them by relative
-  path; they load only when Claude follows the link.
+  path; they load only when the agent follows the link.
 
 ### 2.2 Frontmatter
 
@@ -69,9 +76,9 @@ argument-hint: "[task]"        # optional, short
 ---
 ```
 
-- **`description` is how Claude decides to use the skill.** It must state **what the
-  skill does AND when to use it**, in the third person, with concrete trigger phrases
-  ("Use when the user asks to map a sector / vet a project / find a wallet…").
+- **`description` is how the agent decides to use the skill.** It must state **what
+  the skill does AND when to use it**, in the third person, with concrete trigger
+  phrases ("Use when the user asks to map a sector / vet a project / find a wallet…").
   Lead with the primary use case. Combined `description` length is capped by Claude
   Code at 1,536 chars; we budget **≤ 1,024** and warn beyond it.
 - Keep other frontmatter minimal. We standardize on `name`, `description`,
@@ -79,7 +86,7 @@ argument-hint: "[task]"        # optional, short
 
 ### 2.3 Progressive disclosure & size
 
-Claude always sees every skill's `description`; it loads the **body** only when the
+The agent always sees every skill's `description`; it loads the **body** only when the
 skill triggers, and **reference files** only when the body links to them. Therefore:
 
 - **Body ≤ 500 lines.** Move catalogs/templates/long code into `reference/`.
@@ -130,7 +137,8 @@ standards, oracles).
 
 ## 4. How someone installs it
 
-Three supported paths (full commands in `README.md`):
+Three turnkey paths for Claude Code, plus a model-agnostic path for any MCP client
+(full commands in `README.md`):
 
 **A. As a Claude Code plugin (recommended).** The repo is a single-plugin
 marketplace, so:
@@ -147,8 +155,13 @@ from the bundled `.mcp.json`.
 **C. Personal skills (copy or symlink).** Copy any `skills/<name>/` folder into
 `~/.claude/skills/`, and add the `lumenloop` server to your MCP config once.
 
-In every path the user then **connects the `lumenloop` server** in their Claude
-client (sign in once) and the 18 tools become available to the skills.
+**D. Any other MCP client (ChatGPT, Gemini, Cursor, custom agents).** Add a remote
+MCP connector at `https://mcp.lumenloop.com`, then use each `skills/<name>/SKILL.md`
+as a prompt/reference — the recipes are plain-markdown, model-agnostic tool-call
+sequences.
+
+In every path the user then **connects the `lumenloop` server** in their MCP client
+(sign in once) and the 18 tools become available to the skills.
 
 ---
 

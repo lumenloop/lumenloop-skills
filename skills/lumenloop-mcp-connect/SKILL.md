@@ -1,22 +1,25 @@
 ---
 name: lumenloop-mcp-connect
-description: Connect Claude to LumenLoop's free read-only Stellar ecosystem MCP at https://mcp.lumenloop.com and learn its 18 query tools. Use when the user wants to set up or troubleshoot the lumenloop connector, asks what Stellar ecosystem data is available, or needs to know which lumenloop skill fits a task.
+description: Connect your AI assistant (Claude, ChatGPT, Gemini, Cursor, or any MCP client) to LumenLoop's free read-only Stellar ecosystem MCP at https://mcp.lumenloop.com and learn its 18 query tools. Use when the user wants to set up or troubleshoot the lumenloop connector, asks what Stellar ecosystem data is available, or needs to know which lumenloop skill fits a task.
 user-invocable: true
 ---
 
 # Connect to the LumenLoop Stellar Ecosystem MCP
 
-This is the onboarding anchor for the LumenLoop skill family. It gets Claude connected
-to **LumenLoop's free, read-only Stellar ecosystem MCP** (`https://mcp.lumenloop.com`),
-explains what data is behind it, lists the 18 query tools, and routes you to the right
-sibling skill for the job. The MCP is a public, read-only window on the Stellar
-ecosystem: the **project directory**, **Stellar Community Fund (SCF) submissions**, and
-**editorial / news / AV / event / research content**. Nothing here writes data or costs
-anything — every tool just reads public information.
+This is the onboarding anchor for the LumenLoop skill family. It gets your AI
+assistant connected to **LumenLoop's free, read-only Stellar ecosystem MCP**
+(`https://mcp.lumenloop.com`), explains what data is behind it, lists the 18 query
+tools, and routes you to the right sibling skill for the job. The server speaks the
+open Model Context Protocol, so **any MCP-capable client can connect** — Claude Code,
+Claude.ai, ChatGPT, Gemini, Cursor, or a custom agent. It is a public, read-only
+window on the Stellar ecosystem: the **project directory**, **Stellar Community Fund
+(SCF) submissions**, and **editorial / news / AV / event / research content**. Nothing
+here writes data or costs anything — every tool just reads public information.
 
 ## When to use this skill
 
-- The user wants to **set up** the `lumenloop` connector in Claude Code or Claude.ai.
+- The user wants to **set up** the `lumenloop` connector in Claude Code, Claude.ai, or
+  another MCP client.
 - The connector is **not showing up**, tools fail, or sign-in is stuck.
 - The user asks **what Stellar ecosystem data is available** through LumenLoop.
 - You need a **map of the 18 tools** and their exact signatures.
@@ -61,13 +64,18 @@ Then complete the one-time sign-in:
 After sign-in, the 18 tools appear as `lumenloop` tools. Verify with `/mcp` (status
 should read connected) or by calling a no-arg tool such as `get_categories`.
 
-### Claude.ai / other MCP clients
+### Claude.ai, ChatGPT, Gemini & other MCP clients
 
-1. Open your client's connector settings (Claude.ai: **Settings → Connectors → Add**).
+1. Open your client's connector settings (e.g. Claude.ai: **Settings → Connectors →
+   Add**; other clients have an equivalent "add MCP server / connector" screen).
 2. Add a custom / remote MCP connector with URL `https://mcp.lumenloop.com`
    (transport: streamable HTTP).
 3. Complete the one-time sign-in when prompted.
 4. The `lumenloop` tools are now available in chat.
+
+If your client cannot auto-load skill files, you can still use each
+`skills/<name>/SKILL.md` as a pasted playbook/prompt — the recipes are plain
+model-agnostic MCP tool-call sequences.
 
 ### Smoke test
 
@@ -185,8 +193,8 @@ From here, hand off: use `stellar-ecosystem-scout` to map the whole sector,
 - **Vocabularies are controlled.** Read the buckets first with `get_categories`,
   `get_regions`, `get_tags_vocabulary`, `get_project_tags_vocabulary` (these take no
   args) so filters and tags match what the data actually uses.
-- **Tool missing after a server update?** Reconnect the connector: `/mcp` → `lumenloop`
-  → re-authorize (Claude Code), or re-add the connector in Claude.ai.
+- **Tool missing after a server update?** Reconnect the connector: in Claude Code
+  `/mcp` → `lumenloop` → re-authorize; in other clients, re-add / re-auth the connector.
 
 ---
 

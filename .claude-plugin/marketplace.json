@@ -2,7 +2,7 @@
   "name": "lumenloop",
   "owner": { "name": "LumenLoop", "url": "https://lumenloop.com" },
   "metadata": {
-    "description": "LumenLoop's marketplace of Claude skills for the Stellar ecosystem.",
+    "description": "LumenLoop's marketplace of Stellar ecosystem skills (MCP playbooks).",
     "version": "0.1.0"
   },
   "plugins": [

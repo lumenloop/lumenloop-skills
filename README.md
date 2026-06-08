@@ -1,13 +1,18 @@
 # LumenLoop Stellar Skills
 
-Preconfigured [Claude](https://claude.com/claude-code) skills for **researching and
-building on the [Stellar](https://stellar.org) ecosystem** — wired to LumenLoop's
-free, read-only ecosystem MCP at **`https://mcp.lumenloop.com`**.
+Preconfigured **playbooks** that make **any MCP-capable AI assistant** useful for
+**researching and building on the [Stellar](https://stellar.org) ecosystem** — wired
+to LumenLoop's free, read-only ecosystem MCP at **`https://mcp.lumenloop.com`**.
 
 LumenLoop indexes the public Stellar ecosystem — projects, Stellar Community Fund
-(SCF) submissions, and editorial / news / audio-video content — and exposes it as
-18 read-only query tools. This repo gives Claude the **playbooks** to use those
-tools well, plus an `.mcp.json` that connects the server for you.
+(SCF) submissions, and editorial / news / audio-video content — and exposes it as 18
+read-only query tools over the open [Model Context Protocol](https://modelcontextprotocol.io).
+**Any MCP client can connect** (Claude, ChatGPT, Gemini, Cursor, …). This repo adds the
+**playbooks** for using those tools well, plus an `.mcp.json` that wires the connector.
+
+The skills are packaged as **Claude Code Agent Skills** for one-command install, but the
+connector and the recipes inside each skill are model-agnostic — see
+[Using these with other LLMs](#using-these-with-other-llms).
 
 > Read-only and public by design. These skills only ever query LumenLoop's public
 > ecosystem data — they never write anything.
@@ -62,18 +67,31 @@ claude mcp add --transport http lumenloop https://mcp.lumenloop.com
 
 ## Connect the server
 
-The skills query the `lumenloop` MCP server. After install, connect it in your
-Claude client:
+The skills query the `lumenloop` MCP server. After install, connect it in your client:
 
 - **Claude Code / desktop:** the `lumenloop` server appears from `.mcp.json` (or the
   `claude mcp add` above). Run `/mcp`, pick **lumenloop**, and complete the one-time
   sign-in.
-- **Claude.ai / other MCP clients:** add a connector pointing at
-  `https://mcp.lumenloop.com` and sign in.
+- **Claude.ai, ChatGPT, Gemini & other MCP clients:** add a custom / remote MCP
+  connector pointing at `https://mcp.lumenloop.com` (transport: streamable HTTP) and
+  sign in once.
 
-Once connected, ask Claude something like *"map the RWA projects on Stellar"* or
-*"vet project `<slug>` for me"* and the matching skill takes over. Or invoke one
-directly, e.g. `/stellar-ecosystem-scout real-world assets`.
+Once connected, ask your assistant something like *"map the RWA projects on Stellar"*
+or *"vet project `<slug>` for me"* and the matching skill (or playbook) takes over. In
+Claude Code you can also invoke one directly, e.g.
+`/stellar-ecosystem-scout real-world assets`.
+
+## Using these with other LLMs
+
+The `/plugin` install is Claude Code-specific, but nothing else here is:
+
+1. **Connect the MCP** at `https://mcp.lumenloop.com` from any MCP-capable client
+   (Claude, ChatGPT, Gemini, Cursor, or your own agent). The 18 tools work the same
+   everywhere.
+2. **Use the skill files as playbooks.** Each `skills/<name>/SKILL.md` is plain
+   markdown describing exactly which tools to call, in what order, with which
+   parameters. Paste one in as a system prompt / instructions, or hand it to your
+   agent as a reference — the recipes are model-agnostic MCP tool-call sequences.
 
 ## Develop / contribute
 
