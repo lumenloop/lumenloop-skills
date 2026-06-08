@@ -1,0 +1,11 @@
+{
+  "name": "lumenloop-skills",
+  "displayName": "LumenLoop Stellar Skills",
+  "version": "0.1.0",
+  "description": "Preconfigured Claude skills for building on and researching the Stellar ecosystem, powered by LumenLoop's free read-only ecosystem MCP at https://mcp.lumenloop.com.",
+  "author": { "name": "LumenLoop", "url": "https://lumenloop.com" },
+  "homepage": "https://github.com/lumenloop/lumenloop-skills",
+  "repository": "https://github.com/lumenloop/lumenloop-skills",
+  "license": "MIT",
+  "keywords": ["stellar", "soroban", "blockchain", "mcp", "ecosystem", "scf", "lumenloop"]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "lumenloop",
+  "owner": { "name": "LumenLoop", "url": "https://lumenloop.com" },
+  "metadata": {
+    "description": "LumenLoop's marketplace of Claude skills for the Stellar ecosystem.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "lumenloop-skills",
+      "source": "./",
+      "description": "Seven preconfigured skills for researching and building on Stellar, wired to LumenLoop's free read-only ecosystem MCP.",
+      "version": "0.1.0",
+      "category": "blockchain",
+      "keywords": ["stellar", "soroban", "ecosystem", "scf", "mcp"]
+    }
+  ]
+}
