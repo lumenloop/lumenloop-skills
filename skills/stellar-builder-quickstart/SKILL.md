@@ -1,6 +1,6 @@
 ---
 name: stellar-builder-quickstart
-description: Go from a Stellar product idea to a build path: pick the right Stellar primitives, check ecosystem prior art via LumenLoop, and route to the relevant build skill (Soroban, SDK/dapp, assets, oracles). Use when the user wants to start building something on Stellar and needs orientation on approach and existing work.
+description: "Go from a Stellar product idea to a build path: pick the right Stellar primitives, check ecosystem prior art via LumenLoop, and route to the relevant build skill (Soroban, SDK/dapp, assets, oracles). Use when the user wants to start building something on Stellar and needs orientation on approach and existing work."
 user-invocable: true
 ---
 

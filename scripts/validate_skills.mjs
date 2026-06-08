@@ -54,7 +54,16 @@ function parseFrontmatter(text, e) {
   const fm = {};
   for (const line of text.slice(3, end).split('\n')) {
     const m = line.match(/^([a-zA-Z_-]+):\s*(.*)$/);
-    if (m) fm[m[1]] = m[2].replace(/^["']|["']$/g, '').trim();
+    if (!m) continue;
+    const key = m[1];
+    const raw = m[2].trim();
+    fm[key] = raw.replace(/^["']|["']$/g, '').trim();
+    // YAML-safety: catch footguns the real parser rejects (regex scraping would miss).
+    const quoted = (raw.startsWith('"') && raw.endsWith('"')) || (raw.startsWith("'") && raw.endsWith("'"));
+    if (raw && !quoted) {
+      if (/:\s/.test(raw)) e.push(`frontmatter: value for "${key}" contains ": " — must be quoted or YAML parsing fails (skill loads with NO metadata)`);
+      else if (/^[@`%|>\[\]{}*&!?#,]/.test(raw)) e.push(`frontmatter: value for "${key}" starts with a YAML-special char — quote it`);
+    }
   }
   return { fm, body: text.slice(end + 4) };
 }
