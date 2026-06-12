@@ -84,9 +84,11 @@ search_directory(query="asset")                             # → real hits
 ```
 
 Fire several short, orthogonal queries to cover synonyms (for RWA: `RWA`,
-`tokenization`, `asset`, `stablecoin`, `real estate`). Each result row is
+`tokenization`, `asset`, `stablecoin`, `real estate`). Results come back as one JSON
+object `{count, projects}`; each project row is
 `{slug, title, description, category, tags, website}`. Collect the slugs — these are
-your seeds. If a query returns 0, shorten it or pivot to the semantic tools below.
+your seeds. If a query returns 0, the response includes a recovery hint — shorten the
+term or pivot to the semantic tools below.
 
 ### Pass 3 — Grow the cluster semantically
 
@@ -116,11 +118,12 @@ search_content_semantic(query="real world asset tokenization on Stellar",
 ```
 
 `types` ⊆ `articles | av | events | research` (omit for a broad sweep; narrow for
-speed). It returns per-type arrays of `{id, title, url, domain, publishing_date,
-summary, long_summary, slug, similarity}`. **These are LumenLoop's AI-generated
-summaries plus the source `url` — cite the url, never quote them as full article
-text.** A query like the one above surfaces real explainers such as
-"tokenization-basics".
+speed). `limit` defaults to 5 per content type. It returns per-type arrays of
+`{id, title, url, domain, publishing_date, summary, slug, similarity}` — pass
+`response_format="detailed"` if you also want each hit's `long_summary`. **These are
+LumenLoop's AI-generated summaries plus the source `url` — cite the url, never quote
+them as full article text.** A query like the one above surfaces real explainers such
+as "tokenization-basics".
 
 For any salient article, map it back to the projects it discusses:
 

@@ -43,7 +43,7 @@ For every project mentioned, find its directory record:
 
 ```
 search_directory(query="<short project name>", limit=5)
-   → [{slug, title, description, category, tags, website}]
+   → {count, projects: [{slug, title, description, category, tags, website}]}
 get_project(slug="<slug>", compact=true)
    → { slug, title, short description, category, tags, twitter_handles, website, other_names }
 ```

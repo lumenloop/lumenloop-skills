@@ -65,13 +65,14 @@ search_directory(query="lobstr")
 
 `search_directory` is keyword/ILIKE over title, description, and other_names.
 Keep the term SHORT — one or two words. A long natural-language phrase
-("the lobstr non-custodial wallet app") matches nothing. It returns rows shaped
-like:
+("the lobstr non-custodial wallet app") matches nothing (a zero-hit response
+includes a recovery hint). It returns one JSON object shaped like:
 
 ```
-[{ slug: "lobstr", title: "LOBSTR", category: "Applications",
-   tags: ["Wallet Infra", "Custody"], website: "https://lobstr.co",
-   description: "Non-custodial Stellar wallet ..." }]
+{ count: 1, projects: [
+  { slug: "lobstr", title: "LOBSTR", category: "Applications",
+    tags: ["Wallet Infra", "Custody"], website: "https://lobstr.co",
+    description: "Non-custodial Stellar wallet ..." } ] }
 ```
 
 Pick the row whose `title`/`website` matches the user's intent and lock its

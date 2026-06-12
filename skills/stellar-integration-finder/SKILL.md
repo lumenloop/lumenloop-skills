@@ -60,7 +60,8 @@ search_directory(query="payments")
 search_directory(query="indexer")
 ```
 
-Each row comes back as `{slug, title, description, category, tags, website}`. Worked
+Results arrive as one JSON object `{count, projects}`; each project row is
+`{slug, title, description, category, tags, website}`. Worked
 example — `search_directory(query="wallet")` returns real directory entries such as:
 
 | slug    | title   | category               | tags (excerpt)                 |
@@ -92,9 +93,11 @@ search_content_semantic(
 ```
 
 Returns per-type arrays of `{id, title, url, domain, publishing_date, summary,
-long_summary, slug, similarity}`. These are LumenLoop's AI-generated **summaries plus
-the source `url`** — cite the url; they are not full article text. Use `find_av_passages(query="<capability> on Stellar")` when you want a direct quote from a
-talk or podcast about what to use.
+slug, similarity}` (limit defaults to 5 per content type; pass
+`response_format="detailed"` for `long_summary`). These are LumenLoop's AI-generated
+**summaries plus the source `url`** — cite the url; they are not full article text.
+Use `find_av_passages(query="<capability> on Stellar")` when you want a direct quote
+from a talk or podcast about what to use.
 
 ### 3. Deep-dive each candidate — `get_project` + alternatives
 
