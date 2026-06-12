@@ -80,7 +80,8 @@ search_directory(query="oracle", limit=10)
 search_directory(query="RWA", limit=10)
 ```
 
-Returns `[{slug, title, description, category, tags, website}]`. Note promising slugs.
+Returns `{count, projects: [{slug, title, description, category, tags, website}]}`.
+Note promising slugs.
 
 **b. Grow the cluster (`find_similar_projects_semantic`).** Pick the closest seed slug
 and pull semantic neighbours — better than tag matching for "who else does this".
@@ -99,7 +100,8 @@ search_content_semantic(
   types=["articles","av","research"], limit=6)
 ```
 
-Each hit is `{id, title, url, domain, publishing_date, summary, long_summary, similarity}`.
+Each hit is `{id, title, url, domain, publishing_date, summary, similarity}` (limit
+defaults to 5 per content type; pass `response_format="detailed"` for `long_summary`).
 
 **d. (Optional) Has it been SCF-funded? (`find_similar_scf_submissions`).** Surfaces
 prior proposals + their `award_type` and `linked_project_slug` — strong signal that a

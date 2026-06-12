@@ -12,8 +12,10 @@ Tools are grouped by job. `?` marks an optional parameter.
 
 ### `search_directory(query, limit?)`
 Keyword search projects by name / description / `other_names` (ILIKE).
-Returns `[{slug, title, description, category, tags, website}]`.
-SHORT terms work ("wallet", "oracle", "RWA"); long natural-language phrases return 0.
+Returns one JSON object: `{count, projects: [{slug, title, description, category, tags,
+website}]}`. SHORT terms work ("wallet", "oracle", "RWA"); long natural-language
+phrases return 0 — a zero-hit response includes a recovery hint (shorten the term or
+pivot to the semantic tools).
 
 ### `get_project(slug, compact?)`
 One project by slug.
@@ -29,22 +31,26 @@ content must be published.
 ### `get_categories()`
 Controlled category vocabulary. Live values: **Applications, Developer Tooling,
 Education & Community, Financial Protocols, Infrastructure & Services**. No args.
+Returns `{count, categories}`.
 
 ### `get_regions()`
 Distinct region values (`based_in` + `operating_region`). No args.
+Returns `{count, regions}`.
 
 ### `get_tags_vocabulary()`
 Content tags (articles / AV) — **NOT** project tags. No args.
 
 ### `get_project_tags_vocabulary()`
 Controlled project tags (e.g. "Wallet Infra", "Cross-Border Payments", "SDK"). No args.
+Returns `{count, tags}`.
 
 ---
 
 ## Stellar Community Fund (SCF)
 
 ### `get_scf_submissions(slug?, name?)`
-SCF submissions linked to a project, by `slug` or fuzzy `name`.
+SCF submissions linked to a project, by `slug` or fuzzy `name` (pass at least one).
+Returns `{count, submissions}`.
 
 ### `find_similar_scf_submissions(query?, slug?, category?, round?, limit?)`
 SCF submissions by embedding similarity. Pass `query` (NL topic) **XOR** `slug` (an
@@ -58,10 +64,13 @@ category, round, award_type, linked_project_slug`.
 These return LumenLoop's AI-generated **summaries** plus a source `url` — cite the
 url; they are not full article text.
 
-### `search_content_semantic(query, types?, sources?, date_start?, date_end?, limit?)`
+### `search_content_semantic(query, types?, sources?, date_start?, date_end?, limit?, response_format?)`
 Semantic search across published content. `types ⊆ articles | av | events | research`
-(default broad; narrow for speed). Returns per-type arrays: `{id, title, url, domain,
-publishing_date, summary, long_summary, slug, similarity}`.
+(default broad; narrow for speed). `limit` defaults to **5 per content type**. Returns
+per-type arrays: `{id, title, url, domain, publishing_date, summary, slug, similarity}`.
+`response_format` ∈ `concise | detailed` — `concise` (default) omits `long_summary`;
+pass `detailed` to include it. Weak matches may carry a `_weak_match` flag plus a
+`_hint`; zero-hit searches return a recovery hint instead of an empty silence.
 
 ### `find_content_about_project(slug, limit?)`
 Content that **discusses** a project (cross-domain).
@@ -82,7 +91,8 @@ Projects semantically similar to a given project (better than tag / category mat
 ## Documents & published research library
 
 ### `list_documents(collection, page?, limit?, sort?, order?, search?, source?, period?)`
-Browse a collection. `collection ∈ articles | events | videos | jobs | research`.
+Browse a collection. `collection ∈ articles | events | videos | jobs | research`
+(`av` is accepted as an alias for `videos`).
 `period` (events only) `∈ all | upcoming | past`. Use `search` for title / url search.
 
 ### `search_documents`

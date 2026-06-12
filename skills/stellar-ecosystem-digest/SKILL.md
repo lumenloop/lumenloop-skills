@@ -80,7 +80,7 @@ list_documents(collection="events",   period="upcoming", limit=10)
 ```
 
 - `collection` ∈ `articles | events | videos | jobs | research` (`videos` and `av`
-  map to the same table; use `videos` here).
+  map to the same table; `av` is accepted as an alias for `videos`).
 - `period` applies to **events only**: `all | upcoming | past`.
 - Use `search` to narrow by a title/URL substring when you already have a keyword.
 - Returns rows with `id`, `title`, `url`, `publishing_date`, `source/domain`, and a
@@ -102,10 +102,13 @@ search_content_semantic(
 ```
 
 - `types` ⊆ `articles | av | events | research`. Narrow the set for speed and
-  relevance — default is broad.
+  relevance — default is broad. `limit` defaults to 5 per content type, so raise it
+  (as above) for a digest sweep.
 - Returns **per-type arrays** of `{id, title, url, domain, publishing_date, summary,
-  long_summary, slug, similarity}`. Sort each group by `publishing_date` DESC for the
-  digest; use `similarity` to drop weak matches.
+  slug, similarity}`; pass `response_format="detailed"` to add each hit's
+  `long_summary`. Sort each group by `publishing_date` DESC for the digest; use
+  `similarity` to drop weak matches (weak hits may also carry a `_weak_match` flag
+  plus a `_hint`).
 - For a salient article you want to anchor the digest on, map it to the projects it
   mentions with `get_related_projects(content_id=<id>, content_type="article")` —
   that feeds the "entities to watch" list. `content_type` ∈

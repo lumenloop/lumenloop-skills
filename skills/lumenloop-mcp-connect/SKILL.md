@@ -84,8 +84,8 @@ Call one tool with no arguments to confirm the connection is live:
 
 ```
 get_categories()
-→ ["Applications", "Developer Tooling", "Education & Community",
-   "Financial Protocols", "Infrastructure & Services"]
+→ {count: 5, categories: ["Applications", "Developer Tooling",
+   "Education & Community", "Financial Protocols", "Infrastructure & Services"]}
 ```
 
 If that returns the five categories, you are connected.
@@ -147,8 +147,8 @@ Goal: confirm the connection and get the lay of the land before deeper work.
      Financial Protocols, Infrastructure & Services
 
 2. search_directory(query="wallet", limit=5)
-   → [{slug:"abroad", title:"Abroad", category:"Applications", tags:[...]},
-      {slug:"adamik", ...}, {slug:"airgap", ...}, ...]   # short term → hits
+   → {count: 5, projects: [{slug:"abroad", title:"Abroad", category:"Applications",
+      tags:[...]}, {slug:"adamik", ...}, {slug:"airgap", ...}, ...]}   # short term → hits
 
 3. find_similar_projects_semantic(slug="abroad", limit=5)
    → semantically adjacent wallet/payments projects to grow the cluster
@@ -184,6 +184,10 @@ From here, hand off: use `stellar-ecosystem-scout` to map the whole sector,
   `find_content_about_project`, `find_av_passages`, and `find_content_by_entity` return
   LumenLoop's AI-generated summaries plus the source `url`. **Cite the url**; do not
   present a summary as the verbatim article.
+- **`search_content_semantic` defaults to 5 hits per content type** and to a
+  `concise` response (no `long_summary`). Raise `limit` or pass
+  `response_format="detailed"` when you need more depth; weak matches may carry a
+  `_weak_match` flag plus a `_hint`.
 - **`get_related_projects` is content → projects.** It takes `content_id` +
   `content_type` and maps a piece of content to the projects it mentions — it is NOT
   project → project. For project → project similarity use `find_similar_projects_semantic`.
