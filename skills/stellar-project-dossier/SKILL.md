@@ -131,6 +131,14 @@ DISCUSSES this project. Each item carries `title`, `url`, `domain`,
 LumenLoop's SUMMARIES, not full article text — cite the `url` for every claim
 and never quote the summary as if it were the source's exact words.
 
+Ranking here is recency-aware, so recent coverage (a security incident or
+exploit, an audit, a launch) surfaces alongside the canonical/older items — for
+a due-diligence dossier, scan explicitly for any incident or audit and date it
+(`publishing_date`, flagged as possibly outdated if old). The corpus is the
+source of record for these ecosystem facts and is dated, so cite the date;
+reach for live web only for facts it can't hold (e.g. a current on-chain TVL or
+an upstream package version), not for "has this project had an incident".
+
 If you want a theme-scoped sweep instead (e.g. only what's been said about the
 project's cross-border payments work), use semantic content search and narrow
 the types:
